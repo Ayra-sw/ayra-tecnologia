@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ayra Tecnologia</title>
+<meta name="description" content="Ayra Tecnologia: Ayra Ponto para a jornada da equipe e Ayra CRM para a carteira de clientes.">
+<meta name="theme-color" content="#0F1B2E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%2314233B'/%3E%3Cpath d='M12 29 L20 10 L28 29' fill='none' stroke='%23D4AE5A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='23' r='2.4' fill='%23D4AE5A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
+<style>
+/* Ayra Tecnologia: azul-marinho e dourado da marca; verde do Ayra CRM */
+:root{
+  --navy-900:#0B1424; --navy-800:#0F1B2E; --navy-700:#14233B; --navy-600:#1C2F4D; --navy-500:#29406A;
+  --gold:#D4AE5A; --gold-soft:#E9D4A0; --mist:#AEB9CC; --text:#EEF1F6; --sub:#C6CFDD;
+  --crm-900:#06120E; --crm-800:#0A1D17; --crm-700:#0E2A22; --crm-green:#3DDC97; --crm-gold:#F5C451;
+  --f-display:"Sora","Segoe UI",system-ui,sans-serif; --f-body:"Inter","Segoe UI",system-ui,sans-serif;
+  --acc:var(--gold); --acc-ink:var(--navy-900);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;min-height:100%}
+body{background:var(--navy-900) radial-gradient(120% 80% at 50% -10%,#1A2C4A 0%,var(--navy-800) 45%,var(--navy-900) 100%) fixed;color:var(--text);font-family:var(--f-body);font-size:15px;line-height:1.55;min-height:100vh;display:flex;flex-direction:column}
+body.crm-mode{background:var(--crm-900) radial-gradient(120% 80% at 50% -10%,#123A2E 0%,var(--crm-800) 45%,var(--crm-900) 100%) fixed;--acc:var(--crm-green);--acc-ink:var(--crm-900)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgb(212 174 90 / .045) 1px,transparent 1px),linear-gradient(90deg,rgb(212 174 90 / .045) 1px,transparent 1px);background-size:56px 56px;
+  mask-image:radial-gradient(70% 60% at 50% 30%,#000 20%,transparent 100%)}
+body.crm-mode::before{background-image:linear-gradient(rgb(61 220 151 / .05) 1px,transparent 1px),linear-gradient(90deg,rgb(61 220 151 / .05) 1px,transparent 1px)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:10px}
+.wrap{max-width:1120px;width:100%;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));position:relative;z-index:1}
+[hidden]{display:none!important}
+
+/* ---------- topo ---------- */
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgb(11 20 36 / .65);border-bottom:1px solid rgb(255 255 255 / .06)}
+body.crm-mode header{background:rgb(6 18 14 / .65)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:38px;height:38px;flex:none}
+.wm{font-family:var(--f-display);font-weight:600;letter-spacing:.32em;font-size:14.5px;text-transform:uppercase;line-height:1.2}
+.wm small{display:block;font-family:var(--f-body);letter-spacing:.18em;font-size:10px;color:var(--gold);font-weight:600}
+nav.top{display:flex;align-items:center;gap:6px}
+nav.top a.nl{text-decoration:none;color:var(--mist);font-weight:500;padding:8px 12px;border-radius:9px;font-size:14px}
+nav.top a.nl:hover,nav.top a.nl[aria-current]{color:#fff;background:rgb(255 255 255 / .06)}
+@media (max-width:700px){nav.top a.nl{display:none}}
+.login-wrap{position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:11px 18px;font-weight:600;font-size:14.5px;text-decoration:none;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:transform .15s,background .2s,border-color .2s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn.solid{background:var(--acc);color:var(--acc-ink)}
+.btn.solid:hover{filter:brightness(1.07)}
+.btn.line{border-color:rgb(255 255 255 / .2);color:#fff;background:rgb(255 255 255 / .03)}
+.btn.line:hover{border-color:var(--acc);background:rgb(255 255 255 / .07)}
+.btn.sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+.btn svg{width:17px;height:17px;flex:none}
+.pop{position:absolute;right:0;top:calc(100% + 10px);width:310px;background:#111D31;border:1px solid rgb(255 255 255 / .1);border-radius:16px;padding:16px;box-shadow:0 24px 60px rgb(0 0 0 / .5);display:grid;gap:10px;z-index:30}
+.pop h4{margin:0;font-family:var(--f-display);font-size:16px;font-weight:600}
+.pop p{margin:-4px 0 4px;color:var(--mist);font-size:13px}
+.pop a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;border:1px solid rgb(255 255 255 / .08);background:rgb(255 255 255 / .03)}
+.pop a:hover{border-color:rgb(255 255 255 / .25);background:rgb(255 255 255 / .07)}
+.pop a b{display:block;font-weight:600;font-size:14px}
+.pop a small{color:var(--mist);font-size:12px}
+.pop a .chev{margin-left:auto;opacity:.6}
+.mi{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+.mi.p{background:var(--navy-900);box-shadow:inset 0 0 0 1px rgb(212 174 90 / .4)}
+.mi.c{background:var(--crm-900);box-shadow:inset 0 0 0 1px rgb(61 220 151 / .4)}
+
+/* ---------- início ---------- */
+main{flex:1;position:relative;z-index:1}
+.home{padding-block:64px 56px}
+.kick{margin:0 0 8px;color:var(--acc);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12.5px}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(32px,4.6vw,56px);line-height:1.07;letter-spacing:-.028em;margin:0 0 14px;text-wrap:balance}
+h1 em,h2 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--gold-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+body.crm-mode h1 em,body.crm-mode h2 em{background:linear-gradient(90deg,var(--crm-green),#A8F0CF);-webkit-background-clip:text;background-clip:text}
+.lead{color:var(--mist);margin:0 0 38px;max-width:58ch;font-size:17px}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:820px){.apps{grid-template-columns:1fr}}
+.app{position:relative;display:grid;grid-template-columns:1fr auto;gap:16px 24px;text-decoration:none;border-radius:22px;padding:28px;overflow:hidden;min-height:270px;
+  border:1px solid rgb(255 255 255 / .08);box-shadow:0 20px 50px rgb(0 0 0 / .35);transition:transform .25s ease,box-shadow .25s ease,border-color .25s}
+.app:hover{transform:translateY(-4px);box-shadow:0 30px 70px rgb(0 0 0 / .45)}
+.app.ponto{background:linear-gradient(155deg,#1D3256 0%,var(--navy-700) 55%,#101C30 100%)}
+.app.ponto:hover{border-color:rgb(212 174 90 / .55)}
+.app.crm{background:linear-gradient(155deg,#123A2E 0%,var(--crm-700) 55%,var(--crm-900) 100%)}
+.app.crm:hover{border-color:rgb(61 220 151 / .5)}
+.app .ic{width:54px;height:54px;border-radius:15px;display:grid;place-items:center}
+.ponto .ic{background:var(--navy-900);box-shadow:inset 0 0 0 1px rgb(212 174 90 / .35)}
+.crm .ic{background:var(--crm-900);box-shadow:inset 0 0 0 1px rgb(61 220 151 / .35)}
+.app .vis{grid-column:2;grid-row:1 / span 3;align-self:center;width:150px;height:150px}
+.tag{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px}
+.ponto .tag,.t-gold{color:var(--gold)}
+.crm .tag,.t-green{color:var(--crm-green)}
+.app h3{font-family:var(--f-display);font-weight:600;font-size:30px;letter-spacing:-.02em;margin:0;line-height:1.1}
+.app p.d{margin:8px 0 0;color:var(--sub);max-width:34ch}
+.crm p.d{color:#BFD8CD}
+.app .go{grid-column:1 / -1;align-self:end;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid rgb(255 255 255 / .1)}
+.app .go span{font-weight:600}
+.arrow{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .25s;flex:none}
+.ponto .arrow{background:var(--gold);color:var(--navy-900)}
+.crm .arrow{background:var(--crm-green);color:var(--crm-900)}
+.app:hover .arrow{transform:translateX(4px)}
+.client-strip{margin-top:26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border-radius:16px;border:1px dashed rgb(255 255 255 / .16);background:rgb(255 255 255 / .02)}
+.client-strip b{font-weight:600}
+.client-strip span.m{color:var(--mist);font-size:14px;margin-right:auto}
+@media (max-width:520px){.app{grid-template-columns:1fr;min-height:0;padding:22px}.app .vis{display:none}.app h3{font-size:26px}.home{padding-top:40px}.ctas .btn{flex:1 1 100%}}
+
+/* animações */
+.sweep{transform-origin:75px 75px;animation:rot 5s linear infinite}
+.blip{animation:ping 2.6s ease-out infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes ping{0%{opacity:1}70%{opacity:.25}100%{opacity:1}}
+
+/* ---------- apresentação de produto ---------- */
+.pg{padding-block:44px 30px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--mist);text-decoration:none;font-size:14px;font-weight:500;margin-bottom:26px}
+.back:hover{color:#fff}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.hero .lead{margin-bottom:26px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ctas .note{width:100%;color:var(--mist);font-size:13px;margin-top:4px}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.pill-row span{font-size:12.5px;color:var(--sub);border:1px solid rgb(255 255 255 / .12);border-radius:99px;padding:4px 11px}
+/* maquete Ponto */
+.mock{position:relative;border-radius:22px;padding:22px;background:linear-gradient(160deg,#1D3256,#0F1B2E);border:1px solid rgb(212 174 90 / .25);box-shadow:0 30px 80px rgb(0 0 0 / .45)}
+.mock .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.mock .bar b{font-family:var(--f-display);font-weight:600}
+.mock .bar small{color:var(--mist)}
+.punch{display:grid;place-items:center;gap:6px;padding:22px 10px;border-radius:16px;background:var(--navy-900);border:1px solid rgb(255 255 255 / .06);margin-bottom:14px}
+.punch .t{font-family:var(--f-display);font-size:44px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.punch .btnp{margin-top:6px;background:var(--gold);color:var(--navy-900);border-radius:12px;padding:10px 22px;font-weight:700;display:inline-flex;gap:8px;align-items:center}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kp div{background:rgb(255 255 255 / .04);border:1px solid rgb(255 255 255 / .07);border-radius:12px;padding:10px 12px}
+.kp small{display:block;color:var(--mist);font-size:11.5px}
+.kp b{font-family:var(--f-display);font-size:22px;font-weight:600}
+.timeline{margin-top:12px;display:grid;gap:7px}
+.timeline div{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--sub)}
+.timeline i{width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+.timeline span{margin-left:auto;font-variant-numeric:tabular-nums;color:#fff;font-weight:600}
+/* maquete CRM */
+.mock.c{background:linear-gradient(160deg,#123A2E,#06120E);border-color:rgb(61 220 151 / .25)}
+.act{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgb(255 255 255 / .04);border:1px solid rgb(255 255 255 / .07);margin-bottom:8px;font-size:13.5px}
+.act .ck{width:18px;height:18px;border-radius:50%;border:2px solid rgb(255 255 255 / .3);flex:none}
+.act .ck.on{background:var(--crm-green);border-color:var(--crm-green)}
+.act b{font-weight:600}
+.act small{display:block;color:#9FC2B4;font-size:12px}
+.act .due{margin-left:auto;font-weight:600;font-size:12.5px;white-space:nowrap}
+.due.late{color:#F28B7F}.due.today{color:var(--crm-green)}.due.next{color:var(--sub)}
+.chipsr{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chipsr span{font-size:12px;font-weight:600;border-radius:99px;padding:3px 10px;background:rgb(255 255 255 / .06);color:var(--sub)}
+.chipsr span.on{background:#F28B7F;color:#2A0E0B}
+/* seções */
+section.blk{padding:64px 0 10px}
+.sh{max-width:640px;margin-bottom:28px}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.12;letter-spacing:-.022em;margin:0 0 10px;text-wrap:balance}
+.sh p{color:var(--mist);margin:0;font-size:16px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.feat{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.feat{grid-template-columns:1fr}}
+.feat article{background:rgb(255 255 255 / .035);border:1px solid rgb(255 255 255 / .08);border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start}
+.feat .fi{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgb(255 255 255 / .05);color:var(--acc);box-shadow:inset 0 0 0 1px rgb(255 255 255 / .08)}
+.feat .fi svg{width:21px;height:21px}
+.feat h3{margin:4px 0 0;font-size:17px;font-weight:600;font-family:var(--f-display)}
+.feat p{margin:0;color:var(--sub);font-size:14.5px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:w}
+@media (max-width:820px){.why{grid-template-columns:1fr}}
+.why div{border-top:2px solid var(--acc);padding-top:18px}
+.why b{display:block;font-family:var(--f-display);font-size:20px;font-weight:600;margin-bottom:6px}
+.why p{margin:0;color:var(--sub)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.steps div{position:relative;padding:22px 22px 22px 70px;border-radius:18px;background:rgb(255 255 255 / .03);border:1px solid rgb(255 255 255 / .08)}
+.steps div::before{content:attr(data-n);position:absolute;left:20px;top:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:var(--acc-ink);font-weight:700;font-family:var(--f-display)}
+.steps b{display:block;font-weight:600;margin-bottom:4px}
+.steps p{margin:0;color:var(--sub);font-size:14.5px}
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{border:1px solid rgb(255 255 255 / .1);border-radius:14px;padding:4px 18px;background:rgb(255 255 255 / .025)}
+.faq summary{cursor:pointer;font-weight:600;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:0 0 14px;color:var(--sub)}
+.cta-band{margin:70px 0 20px;border-radius:24px;padding:38px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px;align-items:center;
+  background:linear-gradient(120deg,rgb(212 174 90 / .16),rgb(255 255 255 / .03));border:1px solid rgb(212 174 90 / .3)}
+body.crm-mode .cta-band{background:linear-gradient(120deg,rgb(61 220 151 / .16),rgb(255 255 255 / .03));border-color:rgb(61 220 151 / .3)}
+.cta-band h2{margin:0 0 6px}
+.cta-band p{margin:0;color:var(--sub)}
+.cta-band .ctas{justify-content:flex-end}
+.cta-band .ctas .note{text-align:right}
+@media (max-width:760px){.cta-band .ctas{justify-content:flex-start}.cta-band .ctas .note{text-align:left}}
+@media (max-width:760px){.cta-band{grid-template-columns:1fr;padding:26px}}
+.other{margin:30px 0 10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--mist)}
+.other a{font-weight:600;color:#fff}
+
+footer{border-top:1px solid rgb(255 255 255 / .07);position:relative;z-index:1;margin-top:40px}
+footer .wrap{padding-block:18px calc(22px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:rgb(174 185 204 / .75);font-size:12.5px}
+footer i{font-style:normal;color:var(--gold-soft)}
+.fade{animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sweep,.blip,.fade{animation:none}.app,.arrow{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="#inicio" aria-label="Ayra Tecnologia, início">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#14233B"/><rect x=".5" y=".5" width="39" height="39" rx="10.5" fill="none" stroke="#D4AE5A" stroke-opacity=".35"/><path d="M12 29 L20 10 L28 29" fill="none" stroke="#D4AE5A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="23" r="2.4" fill="#D4AE5A"/></svg>
+    <span class="wm">Ayra<small>Tecnologia</small></span>
+  </a>
+  <nav class="top" aria-label="Produtos">
+    <a class="nl" href="#ponto" data-r="ponto">Ayra Ponto</a>
+    <a class="nl" href="#crm" data-r="crm">Ayra CRM</a>
+    <div class="login-wrap">
+      <button class="btn line sm" type="button" id="btnLogin" aria-expanded="false" aria-controls="pop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Entrar</button>
+      <div class="pop" id="pop" hidden>
+        <h4>Já é cliente?</h4><p>Acesse com o e-mail e a senha da sua conta.</p>
+        <a href="LINK_PONTO_ENTRAR" class="lk-ponto-in"><span class="mi p"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AE5A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>Ayra Ponto</b><small>Registrar ponto e gestão da equipe</small></span><span class="chev">›</span></a>
+        <a href="LINK_CRM" class="lk-crm"><span class="mi c"><svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12.5" fill="none" stroke="#3DDC97" stroke-opacity=".35" stroke-width="1.8"/><path d="M20 20 L20 7.5 A12.5 12.5 0 0 1 31.4 14.9 Z" fill="#3DDC97"/><circle cx="26.6" cy="25" r="2.6" fill="#F5C451"/></svg></span><span><b>Ayra CRM</b><small>Carteira de clientes e atividades</small></span><span class="chev">›</span></a>
+      </div>
+    </div>
+  </nav>
+</div></header>
+
+<main>
+<!-- ================= INÍCIO ================= -->
+<div id="v-inicio" class="view">
+  <div class="wrap home fade">
+    <p class="kick" id="saudacao">Bem-vindo</p>
+    <h1>Tecnologia para cuidar de <em>pessoas e clientes.</em></h1>
+    <p class="lead">A Ayra cria sistemas simples e bonitos para pequenas e médias empresas. Conheça nossos produtos ou entre com a sua conta.</p>
+    <div class="apps">
+      <a class="app ponto" href="#ponto">
+        <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AE5A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <svg class="vis" viewBox="0 0 150 150" aria-hidden="true">
+          <circle cx="75" cy="75" r="66" fill="#0B1424" stroke="#D4AE5A" stroke-opacity=".5" stroke-width="2"/>
+          <g stroke="#D4AE5A" stroke-linecap="round"><line x1="75" y1="15" x2="75" y2="25" stroke-width="3"/><line x1="135" y1="75" x2="125" y2="75" stroke-width="3"/><line x1="75" y1="135" x2="75" y2="125" stroke-width="3"/><line x1="15" y1="75" x2="25" y2="75" stroke-width="3"/></g>
+          <line id="hH" x1="75" y1="75" x2="75" y2="45" stroke="#EEF1F6" stroke-width="5" stroke-linecap="round"/>
+          <line id="hM" x1="75" y1="75" x2="75" y2="30" stroke="#EEF1F6" stroke-width="3.5" stroke-linecap="round"/>
+          <line id="hS" x1="75" y1="85" x2="75" y2="24" stroke="#D4AE5A" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="75" cy="75" r="5" fill="#D4AE5A"/>
+        </svg>
+        <div><p class="tag">Pessoas e jornada</p><h3>Ayra Ponto</h3><p class="d">Ponto eletrônico, escalas e banco de horas, com a equipe em tempo real.</p></div>
+        <div class="go"><span>Conhecer o Ayra Ponto</span><span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+      <a class="app crm" href="#crm">
+        <div class="ic"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12.5" fill="none" stroke="#3DDC97" stroke-opacity=".35" stroke-width="1.6"/><circle cx="20" cy="20" r="6.5" fill="none" stroke="#3DDC97" stroke-opacity=".6" stroke-width="1.6"/><path d="M20 20 L20 7.5 A12.5 12.5 0 0 1 31.4 14.9 Z" fill="#3DDC97" fill-opacity=".9"/><circle cx="26.6" cy="25" r="2.3" fill="#F5C451"/></svg></div>
+        <svg class="vis" viewBox="0 0 150 150" aria-hidden="true">
+          <defs><radialGradient id="rg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3DDC97" stop-opacity=".18"/><stop offset="1" stop-color="#3DDC97" stop-opacity="0"/></radialGradient>
+            <linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3DDC97" stop-opacity="0"/><stop offset="1" stop-color="#3DDC97" stop-opacity=".7"/></linearGradient></defs>
+          <circle cx="75" cy="75" r="66" fill="#06120E"/><circle cx="75" cy="75" r="66" fill="url(#rg)"/>
+          <g fill="none" stroke="#3DDC97"><circle cx="75" cy="75" r="66" stroke-opacity=".45" stroke-width="1.5"/><circle cx="75" cy="75" r="44" stroke-opacity=".25"/><circle cx="75" cy="75" r="22" stroke-opacity=".25"/></g>
+          <path class="sweep" d="M75 75 L75 9 A66 66 0 0 1 132 42 Z" fill="url(#sw)" opacity=".75"/>
+          <circle class="blip" cx="104" cy="52" r="4" fill="#3DDC97"/><circle class="blip" cx="52" cy="98" r="4" fill="#F5C451" style="animation-delay:1s"/><circle class="blip" cx="96" cy="108" r="3.4" fill="#3DDC97" style="animation-delay:1.8s"/>
+        </svg>
+        <div><p class="tag">Clientes e vendas</p><h3>Ayra CRM</h3><p class="d">Carteira de clientes, atividades e follow-ups da equipe, tudo no radar.</p></div>
+        <div class="go"><span>Conhecer o Ayra CRM</span><span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+    </div>
+    <div class="client-strip">
+      <span class="m"><b>Já é cliente?</b> Entre direto no seu sistema.</span>
+      <a class="btn line sm lk-ponto-in" href="LINK_PONTO_ENTRAR">Entrar no Ayra Ponto</a>
+      <a class="btn line sm lk-crm" href="LINK_CRM">Entrar no Ayra CRM</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= AYRA PONTO ================= -->
+<div id="v-ponto" class="view" hidden>
+  <div class="wrap pg fade">
+    <a class="back" href="#inicio">‹ Voltar para o início</a>
+    <div class="hero">
+      <div>
+        <p class="kick">Ayra Ponto · Pessoas e jornada</p>
+        <h1>O ponto da sua equipe, <em>sem planilha e sem papel.</em></h1>
+        <p class="lead">O Ayra Ponto registra a jornada de cada colaborador pelo celular ou computador e mostra para o gestor, em tempo real, quem está trabalhando, quem está em intervalo e quem ainda não bateu o ponto.</p>
+        <div class="ctas" data-cta="Ayra Ponto"></div>
+        <div class="pill-row"><span>Celular e computador</span><span>Feito para até 50 colaboradores</span><span>Tema claro e escuro</span></div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="bar"><b>Hoje</b><small id="mkData">—</small></div>
+        <div class="punch"><small style="color:var(--mist)">Seu próximo registro: saída para o almoço</small><div class="t" id="mkHora">--:--</div><span class="btnp">◷ Registrar ponto</span></div>
+        <div class="kp"><div><small>Trabalhando agora</small><b>18</b></div><div><small>Em intervalo</small><b>3</b></div><div><small>Sem marcação</small><b style="color:var(--gold)">2</b></div></div>
+        <div class="timeline"><div><i></i>Entrada<span>08:02</span></div><div><i style="opacity:.5"></i>Saída para o almoço<span style="color:var(--mist)">—</span></div><div><i style="opacity:.5"></i>Volta do almoço<span style="color:var(--mist)">—</span></div></div>
+      </div>
+    </div>
+
+    <section class="blk">
+      <div class="sh"><h2>Tudo o que o RH precisa, <em>num lugar só.</em></h2><p>Do registro do ponto à aprovação de ajustes, sem trocar de sistema.</p></div>
+      <div class="feat">
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Registro de ponto</h3><p>O colaborador bate o ponto em segundos, pelo celular ou pelo computador.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><h3>Equipe em tempo real</h3><p>Veja quem está trabalhando, em intervalo ou sem marcação, agora mesmo.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><h3>Jornadas, escalas e feriados</h3><p>Monte os horários da empresa uma vez e aplique a cada colaborador.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span><h3>Banco de horas</h3><p>Horas extras e saldos de cada pessoa calculados sem conta manual.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h3>Solicitações e aprovações</h3><p>Esqueceu de bater o ponto? O colaborador pede o ajuste e o gestor aprova com um clique.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3>Equipe organizada</h3><p>Colaboradores, departamentos e cargos, com acessos separados para gestor, RH e colaborador.</p></article>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Por que o Ayra Ponto?</h2></div>
+      <div class="why">
+        <div><b>Simples de verdade</b><p>Sem manual e sem treinamento longo. Se a pessoa usa celular, ela usa o Ayra Ponto.</p></div>
+        <div><b>Feito para empresas em crescimento</b><p>Pensado para startups e pequenas e médias empresas, não para multinacionais com regras infinitas.</p></div>
+        <div><b>Gestão com tempo de sobra</b><p>Menos tempo conferindo planilhas, mais tempo cuidando das pessoas que fazem a empresa acontecer.</p></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Como começar</h2></div>
+      <div class="steps">
+        <div data-n="1"><b>Fale com a gente</b><p>Contamos como funciona e entendemos a rotina da sua empresa.</p></div>
+        <div data-n="2"><b>Cadastre a equipe</b><p>Empresa, horários e colaboradores. Cada um recebe um convite por e-mail.</p></div>
+        <div data-n="3"><b>Comece a registrar</b><p>A equipe bate o ponto e você acompanha tudo em tempo real.</p></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Perguntas frequentes</h2></div>
+      <div class="faq">
+        <details><summary>Funciona no celular?</summary><p>Sim. O Ayra Ponto funciona no navegador do celular e do computador, sem precisar instalar nada.</p></details>
+        <details><summary>Para quantos colaboradores ele serve?</summary><p>Hoje ele é feito para empresas com até 50 colaboradores, que é onde ele faz mais diferença.</p></details>
+        <details><summary>Quanto custa?</summary><p>Os valores dependem do tamanho da equipe. Fale com a gente que preparamos uma proposta.</p></details>
+        <details><summary>Já sou cliente. Como entro?</summary><p>Clique em <b>Entrar</b>, no topo da página, e escolha Ayra Ponto. Use o e-mail e a senha da sua conta.</p></details>
+      </div>
+    </section>
+
+    <div class="cta-band"><div><h2>Vamos colocar o ponto da sua equipe em <em>dia?</em></h2><p>Conte um pouco da sua empresa e a gente te mostra o Ayra Ponto funcionando.</p></div><div class="ctas" data-cta="Ayra Ponto"></div></div>
+    <div class="other">Conheça também: <a href="#crm">Ayra CRM, a carteira de clientes no radar ›</a></div>
+  </div>
+</div>
+
+<!-- ================= AYRA CRM ================= -->
+<div id="v-crm" class="view" hidden>
+  <div class="wrap pg fade">
+    <a class="back" href="#inicio">‹ Voltar para o início</a>
+    <div class="hero">
+      <div>
+        <p class="kick">Ayra CRM · Clientes e vendas</p>
+        <h1>Toda a sua carteira, <em>no radar.</em></h1>
+        <p class="lead">O Ayra CRM organiza clientes, ligações, reuniões e follow-ups da equipe comercial, para nenhuma oportunidade passar despercebida e nenhum cliente ficar esquecido.</p>
+        <div class="ctas" data-cta="Ayra CRM"></div>
+        <div class="pill-row"><span>Acesso de qualquer computador</span><span>Carteira por vendedor</span><span>Backup automático diário</span></div>
+      </div>
+      <div class="mock c" aria-hidden="true">
+        <div class="bar"><b>Atividades</b><small>Minha carteira</small></div>
+        <div class="chipsr"><span class="on">Vencidas 1</span><span>Hoje 2</span><span>Esta semana 6</span></div>
+        <div class="act"><span class="ck"></span><span><b>Enviar proposta</b><small>Revenda Sol · Ana Souza</small></span><span class="due late">Ontem</span></div>
+        <div class="act"><span class="ck"></span><span><b>Ligar para retorno</b><small>Massistec · Reginaldo</small></span><span class="due today">Hoje 14:00</span></div>
+        <div class="act"><span class="ck on"></span><span><b style="text-decoration:line-through;opacity:.6">Reunião de apresentação</b><small>Active Representações</small></span><span class="due next">Concluída</span></div>
+        <div class="act"><span class="ck"></span><span><b>Follow-up WhatsApp</b><small>Astec · Itamar</small></span><span class="due next">Amanhã</span></div>
+      </div>
+    </div>
+
+    <section class="blk">
+      <div class="sh"><h2>Feito para quem <em>vende todo dia.</em></h2><p>Simples o bastante para o vendedor usar de verdade, completo o bastante para o gestor acompanhar.</p></div>
+      <div class="feat">
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><h3>Agenda de atividades</h3><p>Ligações, reuniões, e-mails, WhatsApp e visitas, em lista ou calendário da semana.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><h3>Encerre ou reagende num clique</h3><p>Concluiu? O CRM já pede a próxima atividade. Não deu? Reagenda para amanhã ou para a semana que vem.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h3>Ficha completa do cliente</h3><p>Contato, revenda, descrição, histórico de conversas e tudo o que está planejado, numa tela só.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3>Carteira por vendedor</h3><p>Cada vendedor vê a própria carteira, e o gestor acompanha todas com um painel por vendedor.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span><h3>Importa sua planilha</h3><p>Traga sua base do Excel ou de outro CRM. O Ayra reconhece as colunas e evita cadastros repetidos.</p></article>
+        <article><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><h3>Seguro e com backup</h3><p>Cada pessoa entra com e-mail e senha, vendedores não excluem nada e há backup automático todo dia.</p></article>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Por que o Ayra CRM?</h2></div>
+      <div class="why">
+        <div><b>Nenhum cliente esquecido</b><p>O painel mostra quem está sem próxima atividade e o que está vencido. O radar não deixa passar.</p></div>
+        <div><b>Do jeito que você trabalha</b><p>Arraste colunas, escolha cores e temas, filtre por qualquer campo. O CRM se ajusta à sua rotina.</p></div>
+        <div><b>Sem complicação</b><p>Abre no navegador de qualquer computador, sem instalar nada e sem aquela tela cheia de botões que ninguém usa.</p></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Como começar</h2></div>
+      <div class="steps">
+        <div data-n="1"><b>Fale com a gente</b><p>Entendemos como sua equipe comercial trabalha hoje.</p></div>
+        <div data-n="2"><b>Traga sua base</b><p>Importamos sua planilha de clientes e criamos o acesso de cada vendedor.</p></div>
+        <div data-n="3"><b>Venda no radar</b><p>Cada vendedor organiza a carteira, e o gestor acompanha tudo pelo painel.</p></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sh"><h2>Perguntas frequentes</h2></div>
+      <div class="faq">
+        <details><summary>Preciso instalar alguma coisa?</summary><p>Não. O Ayra CRM abre no navegador, em qualquer computador, com o seu e-mail e senha.</p></details>
+        <details><summary>Consigo trazer meus clientes de outro sistema?</summary><p>Sim. É só exportar a lista em Excel ou CSV e importar no Ayra CRM. Ele mostra uma prévia e avisa quem já está cadastrado.</p></details>
+        <details><summary>O gestor vê o trabalho de todos os vendedores?</summary><p>Sim. O administrador vê todas as carteiras, o painel por vendedor e pode transferir uma carteira inteira de um vendedor para outro.</p></details>
+        <details><summary>Quanto custa?</summary><p>Os valores dependem do número de vendedores. Fale com a gente que preparamos uma proposta.</p></details>
+      </div>
+    </section>
+
+    <div class="cta-band"><div><h2>Coloque sua carteira <em>no radar.</em></h2><p>Mostramos o Ayra CRM funcionando com a realidade da sua equipe.</p></div><div class="ctas" data-cta="Ayra CRM"></div></div>
+    <div class="other">Conheça também: <a href="#ponto">Ayra Ponto, a jornada da equipe sem planilha ›</a></div>
+  </div>
+</div>
+</main>
+
+<footer><div class="wrap">
+  <span>© <span id="ano">2026</span> Ayra Tecnologia</span>
+  <span><i>Pessoas, tempo e gestão em perfeita sintonia.</i></span>
+</div></footer>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — troque só o que está entre as aspas
+   whatsapp: número com 55 + DDD + número, só números. Ex.: 5511999998888
+   email: e-mail de contato. Deixe '' (vazio) para esconder o botão.
+   ========================================================= */
+var CONFIG = {
+  whatsapp: '',
+  email: '',
+  linkPontoEntrar: 'https://ayra-ponto.vercel.app/entrar',
+  linkCrm: 'https://ayra-crm-sand.vercel.app'
+};
+
+(function(){
+  var $=function(s){return document.querySelector(s);}, $$=function(s){return document.querySelectorAll(s);};
+  // links de entrada
+  $$('.lk-ponto-in').forEach(function(a){ a.href=CONFIG.linkPontoEntrar; });
+  $$('.lk-crm').forEach(function(a){ a.href=CONFIG.linkCrm; });
+  // botões de contato
+  var IW='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>';
+  var IM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
+  $$('[data-cta]').forEach(function(box){
+    var prod=box.getAttribute('data-cta'), html='';
+    var msg='Olá! Vi o site da Ayra Tecnologia e quero conhecer o '+prod+'.';
+    if(CONFIG.whatsapp) html+='<a class="btn solid" target="_blank" rel="noopener" href="https://wa.me/'+CONFIG.whatsapp.replace(/\D/g,'')+'?text='+encodeURIComponent(msg)+'">'+IW+'Quero conhecer pelo WhatsApp</a>';
+    if(CONFIG.email) html+='<a class="btn '+(CONFIG.whatsapp?'line':'solid')+'" href="mailto:'+CONFIG.email+'?subject='+encodeURIComponent('Quero conhecer o '+prod)+'&body='+encodeURIComponent(msg)+'">'+IM+'Enviar e-mail</a>';
+    if(!html) html='<span class="btn line" aria-disabled="true">Contato em breve</span>';
+    if(CONFIG.email) html+='<span class="note">Ou escreva para <b>'+CONFIG.email+'</b></span>';
+    box.innerHTML=html;
+  });
+  // rotas: #inicio, #ponto, #crm
+  function route(){
+    var r=(location.hash||'#inicio').slice(1); if(['inicio','ponto','crm'].indexOf(r)<0) r='inicio';
+    $$('.view').forEach(function(v){ v.hidden = v.id!=='v-'+r; });
+    document.body.classList.toggle('crm-mode', r==='crm');
+    $$('nav.top a.nl').forEach(function(a){ if(a.getAttribute('data-r')===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    document.title = r==='ponto'?'Ayra Ponto · Ayra Tecnologia': r==='crm'?'Ayra CRM · Ayra Tecnologia':'Ayra Tecnologia';
+    window.scrollTo(0,0); closePop();
+  }
+  // popover Entrar
+  var btn=$('#btnLogin'), pop=$('#pop');
+  function closePop(){ pop.hidden=true; btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); pop.hidden=!pop.hidden; btn.setAttribute('aria-expanded', String(!pop.hidden)); });
+  document.addEventListener('click',function(e){ if(!e.target.closest('.login-wrap')) closePop(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePop(); });
+  window.addEventListener('hashchange',route); route();
+  // saudação, relógios
+  var h=new Date().getHours(); $('#saudacao').textContent = h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
+  $('#ano').textContent=new Date().getFullYear();
+  function tick(){ var n=new Date(), s=n.getSeconds(), m=n.getMinutes()+s/60, hh=(n.getHours()%12)+m/60;
+    $('#hS').setAttribute('transform','rotate('+(s*6)+' 75 75)'); $('#hM').setAttribute('transform','rotate('+(m*6)+' 75 75)'); $('#hH').setAttribute('transform','rotate('+(hh*30)+' 75 75)');
+    $('#mkHora').textContent=n.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); $('#mkData').textContent=n.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}); }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
