@@ -13,7 +13,7 @@
 /* Ayra Tecnologia: azul-marinho e dourado da marca; verde do Ayra CRM */
 :root{
   --navy-900:#0B1424; --navy-800:#0F1B2E; --navy-700:#14233B; --navy-600:#1C2F4D; --navy-500:#29406A;
-  --gold:#D4AE5A; --gold-soft:#E9D4A0; --mist:#AEB9CC; --text:#EEF1F6; --sub:#C6CFDD;
+  --gold:#D4AE5A; --gold-soft:#E9D4A0; --mist:#C3CCDB; --text:#F2F4F8; --sub:#D6DDE8;
   --crm-900:#06120E; --crm-800:#0A1D17; --crm-700:#0E2A22; --crm-green:#3DDC97; --crm-gold:#F5C451;
   --f-display:"Sora","Segoe UI",system-ui,sans-serif; --f-body:"Inter","Segoe UI",system-ui,sans-serif;
   --acc:var(--gold); --acc-ink:var(--navy-900);
@@ -91,7 +91,7 @@ body.crm-mode h1 em,body.crm-mode h2 em{background:linear-gradient(90deg,var(--c
 .crm .tag,.t-green{color:var(--crm-green)}
 .app h3{font-family:var(--f-display);font-weight:600;font-size:30px;letter-spacing:-.02em;margin:0;line-height:1.1}
 .app p.d{margin:8px 0 0;color:var(--sub);max-width:34ch}
-.crm p.d{color:#BFD8CD}
+.crm p.d{color:#CFE5DB}
 .app .go{grid-column:1 / -1;align-self:end;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid rgb(255 255 255 / .1)}
 .app .go span{font-weight:600}
 .arrow{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .25s;flex:none}
@@ -142,7 +142,7 @@ body.crm-mode h1 em,body.crm-mode h2 em{background:linear-gradient(90deg,var(--c
 .act .ck{width:18px;height:18px;border-radius:50%;border:2px solid rgb(255 255 255 / .3);flex:none}
 .act .ck.on{background:var(--crm-green);border-color:var(--crm-green)}
 .act b{font-weight:600}
-.act small{display:block;color:#9FC2B4;font-size:12px}
+.act small{display:block;color:#B5D3C7;font-size:12px}
 .act .due{margin-left:auto;font-weight:600;font-size:12.5px;white-space:nowrap}
 .due.late{color:#F28B7F}.due.today{color:var(--crm-green)}.due.next{color:var(--sub)}
 .chipsr{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
@@ -190,9 +190,37 @@ body.crm-mode .cta-band{background:linear-gradient(120deg,rgb(61 220 151 / .16),
 .other{margin:30px 0 10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--mist)}
 .other a{font-weight:600;color:#fff}
 
-footer{border-top:1px solid rgb(255 255 255 / .07);position:relative;z-index:1;margin-top:40px}
-footer .wrap{padding-block:18px calc(22px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:rgb(174 185 204 / .75);font-size:12.5px}
+footer{border-top:1px solid rgb(255 255 255 / .07);position:relative;z-index:1}
+footer .wrap{padding-block:18px calc(22px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#B9C3D3;font-size:12.5px}
 footer i{font-style:normal;color:var(--gold-soft)}
+/* ---------- faixa clara das apresentações ---------- */
+.light{background:#F4F6FA;color:#14233B;position:relative;z-index:1;margin-top:56px;border-top:1px solid rgb(212 174 90 / .35);
+  --acc:#9C7425;--acc-ink:#FFFFFF;--mist:#4A5A73;--sub:#3E4D66}
+body.crm-mode .light{background:#F1F7F4;border-top-color:rgb(61 220 151 / .4);--acc:#1C7A57;--acc-ink:#FFFFFF;--mist:#45594F;--sub:#3A4D44}
+.lpg{padding-block:12px 56px}
+.light section.blk{padding-top:52px}
+.light h2{color:#0F1B2E}
+body.crm-mode .light h2{color:#0B2219}
+.light h2 em,body.crm-mode .light h2 em{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--acc)}
+.light .feat article{background:#FFFFFF;border-color:#E0E5EE;box-shadow:0 1px 2px rgb(15 27 46 / .04)}
+body.crm-mode .light .feat article{border-color:#DCE9E2}
+.light .feat .fi{background:#F4EBD7;color:var(--acc);box-shadow:none}
+body.crm-mode .light .feat .fi{background:#DDF3E8}
+.light .feat h3,.light .why b,.light .steps b{color:#0F1B2E}
+body.crm-mode .light .feat h3,body.crm-mode .light .why b,body.crm-mode .light .steps b{color:#0B2219}
+.light .steps div{background:#FFFFFF;border-color:#E0E5EE}
+body.crm-mode .light .steps div{border-color:#DCE9E2}
+.light .faq details{background:#FFFFFF;border-color:#E0E5EE}
+body.crm-mode .light .faq details{border-color:#DCE9E2}
+.light .faq summary{color:#0F1B2E}
+.light .cta-band{background:linear-gradient(120deg,#1D3256,#0F1B2E);border-color:rgb(212 174 90 / .4);color:#F2F4F8;--acc:#D4AE5A;--acc-ink:#0B1424;--mist:#C3CCDB;--sub:#D6DDE8}
+body.crm-mode .light .cta-band{background:linear-gradient(120deg,#123A2E,#06120E);border-color:rgb(61 220 151 / .4);--acc:#3DDC97;--acc-ink:#06120E}
+.light .cta-band h2,body.crm-mode .light .cta-band h2{color:#FFFFFF}
+.light .cta-band h2 em{background:linear-gradient(90deg,var(--acc),#F2E2B8);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.crm-mode .light .cta-band h2 em{background:linear-gradient(90deg,#3DDC97,#A8F0CF);-webkit-background-clip:text;background-clip:text}
+.light .cta-band .btn.line{color:#fff}
+.light .other{color:#4A5A73}
+.light .other a{color:var(--acc)}
 .fade{animation:fade .35s ease both}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.sweep,.blip,.fade{animation:none}.app,.arrow{transition:none}html{scroll-behavior:auto}}
@@ -281,6 +309,8 @@ footer i{font-style:normal;color:var(--gold-soft)}
       </div>
     </div>
 
+  </div>
+  <div class="light"><div class="wrap lpg">
     <section class="blk">
       <div class="sh"><h2>Tudo o que o RH precisa, <em>num lugar só.</em></h2><p>Do registro do ponto à aprovação de ajustes, sem trocar de sistema.</p></div>
       <div class="feat">
@@ -324,6 +354,7 @@ footer i{font-style:normal;color:var(--gold-soft)}
     <div class="cta-band"><div><h2>Vamos colocar o ponto da sua equipe em <em>dia?</em></h2><p>Conte um pouco da sua empresa e a gente te mostra o Ayra Ponto funcionando.</p></div><div class="ctas" data-cta="Ayra Ponto"></div></div>
     <div class="other">Conheça também: <a href="#crm">Ayra CRM, a carteira de clientes no radar ›</a></div>
   </div>
+  </div>
 </div>
 
 <!-- ================= AYRA CRM ================= -->
@@ -348,6 +379,8 @@ footer i{font-style:normal;color:var(--gold-soft)}
       </div>
     </div>
 
+  </div>
+  <div class="light"><div class="wrap lpg">
     <section class="blk">
       <div class="sh"><h2>Feito para quem <em>vende todo dia.</em></h2><p>Simples o bastante para o vendedor usar de verdade, completo o bastante para o gestor acompanhar.</p></div>
       <div class="feat">
@@ -390,6 +423,7 @@ footer i{font-style:normal;color:var(--gold-soft)}
 
     <div class="cta-band"><div><h2>Coloque sua carteira <em>no radar.</em></h2><p>Mostramos o Ayra CRM funcionando com a realidade da sua equipe.</p></div><div class="ctas" data-cta="Ayra CRM"></div></div>
     <div class="other">Conheça também: <a href="#ponto">Ayra Ponto, a jornada da equipe sem planilha ›</a></div>
+  </div>
   </div>
 </div>
 </main>
